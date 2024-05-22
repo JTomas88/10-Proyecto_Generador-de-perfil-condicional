@@ -1,3 +1,4 @@
+import { right } from "@popperjs/core";
 import "../style/index.css";
 
 /**
@@ -29,19 +30,38 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let positionSocials;
+  if (variables.socialMediaPosition === "position-right")
+    positionSocials = `<ul class="position-right">
+      <li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>
+      <li><a href="https://linkedin.com/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
+      <li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
+    </ul>`;
+
+  if (variables.socialMediaPosition === "position-left")
+    positionSocials = `<ul class="position-left">
+  <li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
+  <li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>
+  <li><a href="https://linkedin.com/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
+  <li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
+    </ul>`;
+
   // reset the website body with the new html output
+
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
+
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
+
+          <h1>${variables.name} ${variables.lastName} </h1>
+
+          ${positionSocials}       
+
+          <h2>${variables.role}</h2>
+
+          <h3>${variables.city},${variables.country}</h3>
+        
         </div>
     `;
 }
@@ -54,21 +74,23 @@ window.onload = function() {
     // if includeCover is true the algorithm should show the cover image
     includeCover: true,
     // this is the image's url that will be used as a background for the profile cover
-    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    background:
+      "https://img.freepik.com/vector-gratis/plantilla-patrones-fisuras-emoticonos-varias-caras_23-2148678996.jpg?w=740&t=st=1716371225~exp=1716371825~hmac=68a5a1e68283a41ccded6cf842f56e31bde63f34ab2b4d360619448074be38e8",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL:
+      "src/assets/Imagen de WhatsApp 2024-04-22 a las 09.51.59_a2c2019a.jpg",
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
-    twitter: null,
-    github: null,
-    linkedin: null,
-    instagram: null,
-    name: null,
-    lastName: null,
-    role: null,
-    country: null,
-    city: null
+    twitter: "",
+    github: "",
+    linkedin: "",
+    instagram: "",
+    name: "Name",
+    lastName: "last_name",
+    role: "Selection up",
+    country: "Select country",
+    city: "Select city"
   };
   render(window.variables); // render the card for the first time
 
